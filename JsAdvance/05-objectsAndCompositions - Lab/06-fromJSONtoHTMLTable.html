@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>FromJSONToHTMLTable</title>
+    <style>
+        table,
+        th {
+            border: groove;
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+        }
+
+        td,
+        th {
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrapper">
+    </div>
+    <script>
+        function fromJSONToHTMLTable(input) {
+            let arr = JSON.parse(input)
+            let result = ["<table>"];
+            let [firstElement] = arr;
+            let headings = Object.keys(firstElement)
+            result.push(`<tr>${headings.map(el => `<th>${escapeHTML(el)}</th>`).join('')}</tr>`)
+            for (const record of arr) {
+
+                let row = ['<tr>']
+                for (let prop of headings) {
+
+                    row.push(`<td>${escapeHTML(record[prop])}</td>`)
+
+                }
+                row.push('</tr>')
+                result.push(row.join(''))
+            }
+
+            result.push("</table>")
+
+
+            return result.join("\n")
+            function escapeHTML(value) {
+
+                let pattern = /[<>& ]/g;
+                value = String(value);
+                return value.replace(pattern, (match) => {
+
+                    return {
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        '&': '&amp;',
+                        ' ': '&nbsp;'
+                    }[match];
+                });
+            }
+
+        }
+        console.log(fromJSONToHTMLTable(`[{"Name":"<script>alert('Hacked');<\/script>", "Age":20, "City":"'Vinkel Town' Pernik & Co."}]`));
+
+
+        window.onload = function () {
+            let container = document.getElementById('wrapper');
+            container.innerHTML = fromJSONToHTMLTable(
+                '[{"Name":"<script>alert(\'Hacked\');\<\/script>", "Age":20, "City":"\'Vinkel Town\' Pernik & Co."}]'
+            );;
+        };
+
+    </script>
+</body>
+
+</html>
