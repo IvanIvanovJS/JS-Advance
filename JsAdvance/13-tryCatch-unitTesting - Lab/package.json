@@ -1,0 +1,21 @@
+{
+  "name": "13-trycatch-unittesting---lab",
+  "version": "1.0.0",
+  "main": "01-subSum.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha \"*.test.js\"",
+    "coverage": "c8 npm test",
+    "coverage:deck": "c8 mocha ./deckOfCards.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "c8": "^10.1.3",
+    "chai": "^5.2.0",
+    "mocha": "^11.6.0",
+    "nyc": "^17.1.0"
+  }
+}

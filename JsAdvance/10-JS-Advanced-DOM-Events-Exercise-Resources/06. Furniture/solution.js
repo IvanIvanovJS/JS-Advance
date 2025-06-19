@@ -47,10 +47,6 @@ function solve() {
       createData.appendChild(createInput);
       createRow.appendChild(createData)
       tbodyRef.appendChild(createRow)
-
-
-
-
     }
   })
 
@@ -75,9 +71,6 @@ function solve() {
     outPutTextareaRef.value += `Bought furniture: ${bought.join(`, `)}\n`;
     outPutTextareaRef.value += `Total price: ${totalSum.toFixed(2)}\n`
     outPutTextareaRef.value += `Average decoration factor: ${totalDecor / counter}`
-
-
-
   })
 
 
