@@ -51,7 +51,7 @@ class HomeRenovation {
             throw Error("No tasks have been completed yet!")
         }
         let result = []
-        result.push(`Budget left ${this.budget}.`)
+        result.push(`Budget left $${this.budget}.`)
         result.push(`You have completed ${this.completedTasks.length} tasks.`)
         result.push(`Pending tasks in the renovation plan:`)
         for (const task of this.tasks) {
