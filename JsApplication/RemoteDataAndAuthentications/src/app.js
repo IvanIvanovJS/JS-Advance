@@ -1,5 +1,8 @@
 const userData = sessionStorage.getItem("userData")
-
+document.getElementById("logoutBtn").addEventListener("click", () => {
+    sessionStorage.clear()
+    location = "/RemoteDataAndAuthentications/index.html"
+})
 if (userData) {
     document.getElementById("user").style.display = "inline-block"
 } else {
