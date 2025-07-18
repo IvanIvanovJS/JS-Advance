@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="taskInput" placeholder="Напиши задача">
+    <button id="addTaskBtn">Добави</button>
+
+    <ul id="taskList"></ul>
+</body>
+<script>
+    const btnRef = document.getElementById("addTaskBtn");
+    const inputRef = document.getElementById("taskInput");
+    btnRef.addEventListener("click", onClick)
+    const taskListRef = document.querySelector("#taskList")
+    taskListRef.style.display = "block"
+    inputRef.focus();
+    taskListRef.style.position = "absolute"
+    inputRef.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            onClick();
+        }
+    });
+
+    function onClick() {
+        const input = inputRef.value
+        if (!input) {
+            return alert("Input required!")
+
+        }
+
+        const liCreate = document.createElement("li")
+        localStorage.setItem(input, input);
+        liCreate.textContent = input
+        inputRef.value = ""
+        inputRef.focus();
+        liCreate.style.display = "flex"
+        liCreate.style.flexDirection = "row"
+        liCreate.style.textAlign = "left"
+        liCreate.style.font = "22px"
+
+
+
+        const btnCreate = document.createElement("button")
+        btnCreate.style.padding = 12 + "px"
+        btnCreate.style.borderRadius = "45px"
+        btnCreate.textContent = "[Delete]"
+        btnCreate.style.color = "red"
+        btnCreate.addEventListener("click", () => {
+            localStorage.removeItem(liCreate.textContent)
+            liCreate.remove()
+        })
+        liCreate.appendChild(btnCreate)
+        taskListRef.appendChild(liCreate)
+        liCreate.style.position = "relative"
+
+    }
+
+</script>
+
+</html>
