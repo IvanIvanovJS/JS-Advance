@@ -1,8 +1,12 @@
-document.querySelector("form").addEventListener("submit", loginOn);
-
+import { showCatalogView } from "./catalog.js";
+import { showView, updateNav, URLs } from "./utils.js";
+const article = document.getElementById("login-view")
+article.querySelector("form").addEventListener("submit", loginOn);
+export function showLoginView() {
+    showView(article)
+}
 async function loginOn(event) {
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email")
     const password = formData.get("password")
@@ -11,21 +15,20 @@ async function loginOn(event) {
             return;
         }
 
-        const url = "http://localhost:3030/users/login"
+
         const options = {
             method: "post",
             headers: { "Content-Type": "aplication/json" },
             body: JSON.stringify({ email, password })
         }
-        console.log("test");
 
-        const response = await fetch(url, options)
-        console.log(response);
+        const response = await fetch(URLs.login, options)
+
         if (response.ok !== true) {
             const err = await response.json();
             throw err;
         }
-        console.log("test1");
+
 
 
         const data = await response.json();
@@ -34,7 +37,8 @@ async function loginOn(event) {
             accessToken: data.accessToken
         }
         sessionStorage.setItem("userData", JSON.stringify(userData))
-        location = "/RemoteDataAndAuthentications/index.html"
+        showCatalogView()
+        updateNav()
     } catch (error) {
         alert(error.message)
     }

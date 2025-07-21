@@ -1,0 +1,50 @@
+import { showDetailView } from "./details.js"
+import { showView, URLs } from "./utils.js"
+
+const section = document.getElementById("catalog-view")
+
+export function showCatalogView() {
+    showView(section)
+
+    loadRecipes()
+}
+let recipesData = null;
+async function loadRecipes() {
+    const pCreate = document.createElement("p")
+    pCreate.textContent = "Loading..."
+    pCreate.style.color = "white"
+    section.replaceChildren(pCreate)
+
+    const recipesUrl = await fetch(URLs.recipes)
+    recipesData = await recipesUrl.json()
+
+    showRecipes(recipesData)
+}
+
+
+function showRecipes(recipes) {
+    section.replaceChildren()
+    recipes.map(recipe => section.appendChild(createRecipesPreview(recipe)))
+
+}
+
+function createRecipesPreview(recipe) {
+    const element = document.createElement('article')
+    element.className = "preview"
+    element.innerHTML = `<div class="title">
+                             <h2>${recipe.name}</h2>
+                        </div>
+                        <div class="small">
+                            <img src = "${recipe.img}">
+                        </div>`
+
+    element.addEventListener("click", onClick)
+
+
+    function onClick() {
+        showDetailView(recipe._id)
+    }
+    return element
+
+}
+

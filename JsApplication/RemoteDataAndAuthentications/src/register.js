@@ -1,7 +1,11 @@
+import { showCatalogView } from "./catalog.js";
+import { showView, updateNav, URLs } from "./utils.js";
 
-const formRef = document.querySelector("form")
-formRef.addEventListener("submit", onRegister)
-
+const article = document.getElementById("register-view")
+article.querySelector("form").addEventListener("submit", onRegister)
+export function showRegisterView() {
+    showView(article)
+}
 async function onRegister(event) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -20,13 +24,13 @@ async function onRegister(event) {
         if (password.length < 3) {
             throw new Error("Password must be at least 3 characters")
         }
-        const url = 'http://localhost:3030/users/register'
+
         const options = {
             method: 'post',
             headers: { 'Content-Type': 'aplication/json' },
             body: JSON.stringify({ email, password })
         }
-        const response = await fetch(url, options)
+        const response = await fetch(URLs.register, options)
         if (response.ok !== true) {
             const err = await response.json()
             throw err
@@ -37,7 +41,8 @@ async function onRegister(event) {
             accessToken: data.accessToken
         }
         sessionStorage.setItem("userData", JSON.stringify(userData))
-        location = "/RemoteDataAndAuthentications/index.html"
+        showCatalogView()
+        updateNav()
 
     } catch (error) {
         alert(error.message)
