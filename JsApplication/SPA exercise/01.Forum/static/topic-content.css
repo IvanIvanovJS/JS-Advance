@@ -91,7 +91,7 @@
     /* border-radius: 0.3em; */
     font-size: 0.8em;
     margin-top: 1em;
-    text-align:end;
+    text-align: end;
 }
 
 .comment div p {
@@ -128,7 +128,7 @@
     justify-content: center;
 }
 
- img {
+img {
     float: left;
     padding: 0;
     margin: 1em 0;
@@ -175,6 +175,7 @@
 .answer-comment p {
     flex-basis: 15%;
     padding-bottom: 0.3em;
+
 }
 
 .answer-comment p span {
