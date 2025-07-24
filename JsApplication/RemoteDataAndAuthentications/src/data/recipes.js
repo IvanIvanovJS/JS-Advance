@@ -1,4 +1,5 @@
 import { request, URLs } from "./request.js"
+import { getUserData } from "../utils.js"
 export async function getlAllRecipes() {
     return await request("GET", URLs.recipes)
 }

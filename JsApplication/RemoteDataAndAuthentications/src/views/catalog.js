@@ -1,13 +1,11 @@
-import { getlAllRecipes } from "./data/recipes.js"
-import { showDetailView } from "./details.js"
-import { showView } from "./utils.js"
+import { getlAllRecipes } from "../data/recipes.js"
+import { navigate } from "../nav.js"
 
 const section = document.getElementById("catalog-view")
 
 export function showCatalogView() {
-    showView(section)
-
     loadRecipes()
+    return section
 }
 let recipesData = null;
 async function loadRecipes() {
@@ -40,7 +38,7 @@ function createRecipesPreview(recipe) {
 
 
     function onClick() {
-        showDetailView(recipe._id)
+        navigate("details", recipe._id)
     }
     return element
 

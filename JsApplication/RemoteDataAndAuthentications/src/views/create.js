@@ -1,7 +1,7 @@
-import { showCatalogView } from "./catalog.js";
-import { createRecipe } from "./data/recipes.js";
-import { showLoginView } from "./login.js";
-import { getUserData, showView } from "./utils.js";
+
+import { createRecipe } from "../data/recipes.js";
+import { navigate } from "../nav.js";
+import { getUserData, updateNav } from "../utils.js";
 
 
 const article = document.getElementById("create-view");
@@ -10,9 +10,12 @@ article.querySelector("form").addEventListener("submit", onCreate);
 
 export function showCreateView() {
     if (!getUserData()) {
-        return showLoginView();
+        navigate("login-link")
+        updateNav()
+        return
+
     }
-    showView(article)
+    return article
 }
 async function onCreate(event) {
     event.preventDefault();
@@ -30,7 +33,7 @@ async function onCreate(event) {
         }
         createRecipe(name, img, ingredients, steps)
 
-        showCatalogView()
+        navigate("catalog-link")
     } catch (error) {
         alert(error.message)
     }

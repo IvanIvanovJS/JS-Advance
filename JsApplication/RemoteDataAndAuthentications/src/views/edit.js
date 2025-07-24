@@ -1,6 +1,6 @@
-import { editRecipeById } from "./data/recipes.js";
-import { showDetailView } from "./details.js";
-import { showView } from "./utils.js";
+import { editRecipeById } from "../data/recipes.js";
+import { navigate } from "../nav.js";
+
 
 export function showEditView(details) {
     const section = document.createElement("section");
@@ -18,7 +18,8 @@ export function showEditView(details) {
         </article>`
     section.querySelector("form").addEventListener("submit", (event) => onEdit(event));
 
-    showView(section)
+
+    return section
 
 
     async function onEdit(event) {
@@ -37,7 +38,7 @@ export function showEditView(details) {
             }
             editRecipeById(details._id, name, img, ingredients, steps)
 
-            showDetailView(details._id)
+            navigate("details", details._id)
         } catch (error) {
             alert(error.message)
         }

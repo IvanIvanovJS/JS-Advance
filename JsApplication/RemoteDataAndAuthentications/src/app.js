@@ -1,22 +1,30 @@
-import { showCatalogView } from "./catalog.js"
-import { showRegisterView } from "./register.js"
-import { showLoginView } from "./login.js"
-import { showCreateView } from "./create.js"
-import { navigation, updateNav } from "./utils.js"
+import { showCatalogView } from "./views/catalog.js"
+import { showRegisterView } from "./views/register.js"
+import { showLoginView } from "./views/login.js"
+import { showCreateView } from "./views/create.js"
+import { updateNav } from "./utils.js"
 import { logout } from "./data/request.js"
+import { initNav, navigate } from "./nav.js"
+import { showDetailView } from "./views/details.js"
+import { showEditView } from "./views/edit.js"
+import { showDeleteView } from "./views/delete.js"
 
 document.getElementById("section").replaceChildren()
 document.getElementById("logoutBtn").addEventListener("click", () => {
     logout()
     sessionStorage.clear()
-    showCatalogView()
+    navigate("catalog-link")
     updateNav()
 })
+const views = {
+    "catalog-link": showCatalogView,
+    "login-link": showLoginView,
+    "register-link": showRegisterView,
+    "create-link": showCreateView,
+    "details": showDetailView,
+    "editView": showEditView,
+    "deleteView": showDeleteView
+}
+initNav(views)
 updateNav()
-
-document.getElementById("catalog-link").addEventListener("click", (event) => navigation(event, showCatalogView))
-document.getElementById("login-link").addEventListener("click", (event) => navigation(event, showLoginView))
-document.getElementById("register-link").addEventListener("click", (event) => navigation(event, showRegisterView))
-document.getElementById("create-link").addEventListener("click", (event) => navigation(event, showCreateView))
-
-showCatalogView()
+navigate("catalog-link")

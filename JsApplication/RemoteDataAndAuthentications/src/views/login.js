@@ -1,11 +1,10 @@
-
-import { showCatalogView } from "./catalog.js";
-import { login } from "./data/request.js";
-import { showView, updateNav } from "./utils.js";
+import { login } from "../data/request.js";
+import { updateNav } from "../utils.js";
+import { navigate } from "../nav.js";
 const article = document.getElementById("login-view")
 article.querySelector("form").addEventListener("submit", loginOn);
 export function showLoginView() {
-    showView(article)
+    return article;
 }
 async function loginOn(event) {
     event.preventDefault();
@@ -24,7 +23,7 @@ async function loginOn(event) {
         }
         sessionStorage.setItem("userData", JSON.stringify(userData))
         updateNav()
-        showCatalogView()
+        navigate("catalog-link")
 
     } catch (error) {
         alert(error.message)

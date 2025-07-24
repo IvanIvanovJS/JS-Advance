@@ -1,8 +1,7 @@
 
-import { getUserData, showView, updateNav } from "./utils.js"
-import { showEditView } from "./edit.js"
-import { showDeleteView } from "./delete.js"
-import { getRecipeById } from "./data/recipes.js"
+import { getUserData, updateNav } from "../utils.js"
+import { getRecipeById } from "../data/recipes.js"
+import { navigate } from "../nav.js"
 const section = document.createElement("section")
 section.classList.add("details-view")
 
@@ -10,8 +9,8 @@ export function showDetailView(recipeID) {
 
 
     getRecipeDetails(recipeID)
-    showView(section);
     updateNav()
+    return section
 }
 async function getRecipeDetails(recipeID) {
     const data = await getRecipeById(recipeID)
@@ -74,10 +73,10 @@ function createRecipesPreview(recipeInfo) {
             editBtn.addEventListener("click", onEdit);
             deleteBtn.addEventListener("click", onDelete)
             function onEdit() {
-                showEditView(details)
+                navigate("editView", details)
             }
             function onDelete() {
-                showDeleteView(details)
+                navigate("deleteView", details)
             }
         }
     }

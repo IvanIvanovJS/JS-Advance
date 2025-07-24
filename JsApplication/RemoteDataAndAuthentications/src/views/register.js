@@ -1,11 +1,11 @@
-import { showCatalogView } from "./catalog.js";
-import { register } from "./data/request.js";
-import { showView, updateNav } from "./utils.js";
+import { register } from "../data/request.js";
+import { navigate } from "../nav.js";
+import { updateNav } from "../utils.js";
 
 const article = document.getElementById("register-view")
 article.querySelector("form").addEventListener("submit", onRegister)
 export function showRegisterView() {
-    showView(article)
+    return article
 }
 async function onRegister(event) {
     event.preventDefault();
@@ -34,7 +34,7 @@ async function onRegister(event) {
             accessToken: data.accessToken
         }
         sessionStorage.setItem("userData", JSON.stringify(userData))
-        showCatalogView()
+        navigate("catalog-link")
         updateNav()
 
     } catch (error) {
