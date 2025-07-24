@@ -1,7 +1,8 @@
 
-import { getUserData, showView, updateNav, URLs } from "./utils.js"
+import { getUserData, showView, updateNav } from "./utils.js"
 import { showEditView } from "./edit.js"
 import { showDeleteView } from "./delete.js"
+import { getRecipeById } from "./data/recipes.js"
 const section = document.createElement("section")
 section.classList.add("details-view")
 
@@ -13,9 +14,7 @@ export function showDetailView(recipeID) {
     updateNav()
 }
 async function getRecipeDetails(recipeID) {
-
-    const response = await fetch(URLs.recipes + `/${recipeID}`)
-    const data = await response.json()
+    const data = await getRecipeById(recipeID)
 
     createRecipesPreview(data)
 }

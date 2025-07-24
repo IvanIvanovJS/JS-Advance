@@ -1,5 +1,5 @@
 const main = document.querySelector("main")
-let userData = null;
+
 
 export function showView(view) {
     main.replaceChildren(view)
@@ -10,22 +10,14 @@ export function navigation(event, callback) {
     callback();
 
 }
-export const URLs = {
-
-    recipes: "http://localhost:3030/data/recipes",
-    login: "http://localhost:3030/users/login",
-    register: 'http://localhost:3030/users/register',
-
-
-}
 
 export function getUserData() {
-    return userData
+    return JSON.parse(sessionStorage.getItem("userData"))
 }
 
 export function updateNav() {
-    userData = JSON.parse(sessionStorage.getItem("userData"))
-    if (userData) {
+
+    if (getUserData()) {
         document.getElementById("guest").style.display = "none"
         document.getElementById("user").style.display = "inline-block"
 

@@ -1,6 +1,7 @@
 import { showCatalogView } from "./catalog.js";
+import { createRecipe } from "./data/recipes.js";
 import { showLoginView } from "./login.js";
-import { getUserData, showView, URLs } from "./utils.js";
+import { getUserData, showView } from "./utils.js";
 
 
 const article = document.getElementById("create-view");
@@ -27,19 +28,7 @@ async function onCreate(event) {
         if (!name || !img || !ingredients || !steps) {
             throw new Error("All fields must be fulfilled")
         }
-        const userData = getUserData()
-
-        const options = {
-            method: "post",
-            headers: { "Content-type": "aplication/json", "X-Authorization": userData.accessToken },
-            body: JSON.stringify({ name, img, ingredients, steps })
-        }
-
-        const response = await fetch(URLs.recipes, options)
-        if (response.ok !== true) {
-            const err = await response.json()
-            return err;
-        }
+        createRecipe(name, img, ingredients, steps)
 
         showCatalogView()
     } catch (error) {

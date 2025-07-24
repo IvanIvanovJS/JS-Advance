@@ -1,5 +1,6 @@
+import { editRecipeById } from "./data/recipes.js";
 import { showDetailView } from "./details.js";
-import { showView, URLs, getUserData } from "./utils.js";
+import { showView } from "./utils.js";
 
 export function showEditView(details) {
     const section = document.createElement("section");
@@ -34,19 +35,7 @@ export function showEditView(details) {
             if (!name || !img || !ingredients || !steps) {
                 throw new Error("All fields must be fulfilled")
             }
-            const userData = getUserData()
-
-            const options = {
-                method: "PUT",
-                headers: { "Content-type": "aplication/json", "X-Authorization": userData.accessToken },
-                body: JSON.stringify({ name, img, ingredients, steps })
-            }
-
-            const response = await fetch(URLs.recipes + `/${details._id}`, options)
-            if (response.ok !== true) {
-                const err = await response.json()
-                return err;
-            }
+            editRecipeById(details._id, name, img, ingredients, steps)
 
             showDetailView(details._id)
         } catch (error) {

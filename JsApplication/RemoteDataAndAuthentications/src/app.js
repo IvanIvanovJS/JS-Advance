@@ -3,9 +3,11 @@ import { showRegisterView } from "./register.js"
 import { showLoginView } from "./login.js"
 import { showCreateView } from "./create.js"
 import { navigation, updateNav } from "./utils.js"
+import { logout } from "./data/request.js"
 
 document.getElementById("section").replaceChildren()
 document.getElementById("logoutBtn").addEventListener("click", () => {
+    logout()
     sessionStorage.clear()
     showCatalogView()
     updateNav()

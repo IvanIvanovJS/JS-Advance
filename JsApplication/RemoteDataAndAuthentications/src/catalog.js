@@ -1,5 +1,6 @@
+import { getlAllRecipes } from "./data/recipes.js"
 import { showDetailView } from "./details.js"
-import { showView, URLs } from "./utils.js"
+import { showView } from "./utils.js"
 
 const section = document.getElementById("catalog-view")
 
@@ -15,17 +16,14 @@ async function loadRecipes() {
     pCreate.style.color = "white"
     section.replaceChildren(pCreate)
 
-    const recipesUrl = await fetch(URLs.recipes)
-    recipesData = await recipesUrl.json()
+    recipesData = await getlAllRecipes()
 
     showRecipes(recipesData)
 }
 
 
 function showRecipes(recipes) {
-    section.replaceChildren()
-    recipes.map(recipe => section.appendChild(createRecipesPreview(recipe)))
-
+    section.replaceChildren(...recipes.map(createRecipesPreview))
 }
 
 function createRecipesPreview(recipe) {

@@ -1,18 +1,11 @@
-import { URLs, updateNav, getUserData, showView } from "./utils.js";
+import { deleteRecipeById } from "./data/recipes.js";
+import { updateNav, showView } from "./utils.js";
 
 export function showDeleteView(details) {
     deleteRequest()
     async function deleteRequest() {
         try {
-            const options = {
-                method: "DELETE",
-                headers: { "X-Authorization": getUserData().accessToken }
-            }
-            const response = await fetch(URLs.recipes + `/${details._id}`, options)
-            const data = await response.json()
-            if (response.ok !== true) {
-                throw data
-            }
+            deleteRecipeById(details._id)
 
             const article = document.createElement("article")
             article.classList.add("preview")

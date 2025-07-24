@@ -1,5 +1,6 @@
 import { showCatalogView } from "./catalog.js";
-import { showView, updateNav, URLs } from "./utils.js";
+import { register } from "./data/request.js";
+import { showView, updateNav } from "./utils.js";
 
 const article = document.getElementById("register-view")
 article.querySelector("form").addEventListener("submit", onRegister)
@@ -25,18 +26,10 @@ async function onRegister(event) {
             throw new Error("Password must be at least 3 characters")
         }
 
-        const options = {
-            method: 'post',
-            headers: { 'Content-Type': 'aplication/json' },
-            body: JSON.stringify({ email, password })
-        }
-        const response = await fetch(URLs.register, options)
-        if (response.ok !== true) {
-            const err = await response.json()
-            throw err
-        }
-        const data = await response.json();
+
+        const data = await register(email, password)
         const userData = {
+            email,
             id: data._id,
             accessToken: data.accessToken
         }
