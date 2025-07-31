@@ -23,10 +23,9 @@ page("/my-furniture", showMyFurniture)
 page("/login", showLoginView)
 page("/register", showRegisterView)
 page("/logout", onLogout)
-page("/details", showDetailsView)
-page("/edit", showEditDetails)
-page("/delete", onDelete)
-
+page("/details/:id", showDetailsView)
+page("/edit/:id", showEditDetails)
+page("/delete/:id", onDelete)
 
 page.start()
 

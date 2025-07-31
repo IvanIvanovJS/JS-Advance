@@ -1,6 +1,8 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
+import { getAllFurniture } from "../services/dataService.js";
 
-export function showDashboardView(ctx) {
+export async function showDashboardView(ctx) {
+    const data = await getAllFurniture()
 
     const temp = html`
      <div class="row space-top">
@@ -10,50 +12,28 @@ export function showDashboardView(ctx) {
             </div>
         </div>
         <div class="row space-top">
-            <div class="col-md-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <img src="/images/table.png" />
-                        <p>Description here</p>
-                        <footer>
-                            <p>Price: <span>235 $</span></p>
-                        </footer>
-                        <div>
-                            <a href=/details class="btn btn-info">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <img src="/images/sofa.jpg" />
-                        <p>Description here</p>
-                        <footer>
-                            <p>Price: <span>1200 $</span></p>
-                        </footer>
-                        <div>
-                            <a href=”#” class="btn btn-info">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <img src="/images/chair.jpg" />
-                        <p>Description here</p>
-                        <footer>
-                            <p>Price: <span>55 $</span></p>
-                        </footer>
-                        <div>
-                            <a href=”#” class="btn btn-info">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            ${data.map(f => furnitureTemp(f))}
         </div>`
     ctx.render(temp)
 
 
+}
+
+function furnitureTemp({ _id, description, img, price }) {
+    return html`
+     <div class="col-md-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <img src=${img} />
+                        <p>${description}</p>
+                        <footer>
+                            <p>Price: <span>${price} $</span></p>
+                        </footer>
+                        <div>
+                            <a href=/details/${_id} class="btn btn-info">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    `
 }
