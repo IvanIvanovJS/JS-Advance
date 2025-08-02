@@ -1,12 +1,12 @@
 import { html } from "../../node_modules/lit-html/lit-html.js";
 import { createFurnitureByID } from "../services/dataService.js";
 
-let contex = null;
+
 export function showCreateView(ctx) {
-    contex = ctx
-    ctx.render(createTemp())
+
+    ctx.render(createTemp(ctx))
 }
-function createTemp() {
+function createTemp(ctx) {
     return html`
     <div class="row space-top">
             <div class="col-md-12">
@@ -14,7 +14,7 @@ function createTemp() {
                 <p>Please fill all fields.</p>
             </div>
         </div>
-        <form @submit=${onSubmit}>
+        <form @submit=${(e) => onSubmit(e, ctx)}>
             <div class="row space-top">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -53,7 +53,7 @@ function createTemp() {
         </form>`
 }
 
-async function onSubmit(e) {
+async function onSubmit(e, ctx) {
     e.preventDefault()
     const form = e.target
     const formData = new FormData(e.target)
@@ -89,7 +89,7 @@ async function onSubmit(e) {
         material
     })
 
-    contex.page.redirect("/dashboard")
+    ctx.page.redirect("/dashboard")
 
 }
 function isInvalid(root, input) {

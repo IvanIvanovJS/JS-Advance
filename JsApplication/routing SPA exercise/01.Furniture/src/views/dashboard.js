@@ -19,6 +19,7 @@ export async function showDashboardView(ctx) {
 
 }
 
+
 function furnitureTemp({ _id, description, img, price }) {
     return html`
      <div class="col-md-4">
@@ -30,7 +31,7 @@ function furnitureTemp({ _id, description, img, price }) {
                             <p>Price: <span>${price} $</span></p>
                         </footer>
                         <div>
-                            <a href=/details/${_id} class="btn btn-info">Details</a>
+                                                       <a href=/details/${_id} class="btn btn-info">Details</a>
                         </div>
                     </div>
                 </div>
