@@ -20,7 +20,7 @@ async function browseTemp() {
                     <h1>Team Browser</h1>
                 </article>
                 ${userData ? html`<article class="layout narrow">
-                    <div class="pad-small"><a href="#" class="action cta">Create Team</a></div>
+                    <div class="pad-small"><a href="/create" class="action cta">Create Team</a></div>
                 </article>` : nothing}
                 ${layoutTemp(teams, members)}              
 
@@ -45,7 +45,7 @@ function layoutTemp(teams, members) {
                         <h2>${team.name}</h2>
                         <p>${team.description}</p>
                         <span class="details">${currentMembers.length} Members</span>
-                        <div><a href="/details" class="action">See details</a></div>
+                        <div><a href="/details/${teamId}" class="action">See details</a></div>
                     </div>
                 </article>`)
     }

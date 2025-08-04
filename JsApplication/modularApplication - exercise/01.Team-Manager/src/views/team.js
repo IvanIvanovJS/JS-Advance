@@ -22,7 +22,7 @@ async function myTeamsTemplate(ctx) {
                         <p><a href="#">Browse all teams</a> to join one, or use the button bellow to cerate your own
                             team.</p>` : nothing}
                     </div>
-                    <div class=""><a href="#" class="action cta">Create Team</a></div>
+                    <div class=""><a href="/create" class="action cta">Create Team</a></div>
                 </article>
           
                 ${data.map(t => teamTemplate(t, members))}
@@ -38,7 +38,7 @@ function teamTemplate(data, members) {
                         <h2>${data.team.name}</h2>
                         <p>${data.team.description}</p>
                         <span class="details">${currentMembers.length} Members</span>
-                        <div><a href="/details" class="action">See details</a></div>
+                        <div><a href="/details/${data.teamId}" class="action">See details</a></div>
                     </div>
                 </article>
     `
