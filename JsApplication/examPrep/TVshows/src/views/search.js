@@ -6,7 +6,7 @@ const temp = (ctx) => html`   <section id="search">
 
           <div class="form">
             <h2>Search</h2>
-            <form class="search-form" @submit=${(e) => onSubmit(e, ctx)}>
+            <form class="search-form" @submit=${createSubmitHandler(onSubmit.bind(null, ctx))}>
               <input
                 type="text"
                 name="search"
@@ -32,12 +32,12 @@ const movieTemp = (data) => html`
               </div>
               </div>
 `
-const resultTemp = (data) => html`
+const resultTemp = (data, ctx) => html`
 <section id="search">
 
           <div class="form">
             <h2>Search</h2>
-            <form class="search-form" @submit=${(e) => onSubmit(e, ctx)}>
+            <form class="search-form" @submit=${createSubmitHandler(onSubmit.bind(null, ctx))}>
               <input
                 type="text"
                 name="search"
@@ -57,13 +57,14 @@ const resultTemp = (data) => html`
 export function showSearch(ctx) {
     ctx.render(temp(ctx))
 }
-async function onSubmit(e, ctx) {
-    const { search } = createSubmitHandler(e)
+async function onSubmit(ctx, query) {
+    const { search } = query
+    if (!search) {
+        return
+    }
     const data = await searchByText(search)
 
-
-    ctx.render(resultTemp(data))
-
+    ctx.render(resultTemp(data, ctx))
 }
 
 

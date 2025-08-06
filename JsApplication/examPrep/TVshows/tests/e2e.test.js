@@ -63,7 +63,7 @@ const mockData = {
             "_createdOn": 1617194295480
         }
     ],
-    
+
 };
 
 const endpoints = {
@@ -76,8 +76,8 @@ const endpoints = {
     details: (id) => `/data/shows/${id}`,
     delete: (id) => `/data/shows/${id}`,
     own: (showId, userId) =>
-    `/data/shows?where=showId%3D%22${showId}%22%20and%20_ownerId%3D%22${userId}%22&count`,
-  };
+        `/data/shows?where=showId%3D%22${showId}%22%20and%20_ownerId%3D%22${userId}%22&count`,
+};
 
 
 
@@ -792,7 +792,7 @@ describe("E2E tests", function () {
                     submitBtn.click(),
                 ]);
 
-                await page.waitForSelector('#shows', {timeout: interval});
+                await page.waitForSelector('#shows', { timeout: interval });
             });
         })
 
@@ -850,7 +850,7 @@ describe("E2E tests", function () {
                 expect(imageSrc).to.contains(data.imageUrl);
                 expect(title).to.contains(data.title);
                 expect(details).to.contains(data.details);
-           
+
                 expect(await page.isVisible('#action-buttons >> text="Delete"')).to.equal(false, 'Delete button was visible for non owner');
                 expect(await page.isVisible('#action-buttons >> text="Edit"')).to.equal(false, 'Edit button was visible for non-owner');
 
@@ -894,12 +894,12 @@ describe("E2E tests", function () {
                 let imageSrc = await imageElement.getAttribute('src');
                 let title = await titleElement.textContent();
                 let description = await descriptionElement.textContent();
-            
+
 
                 expect(imageSrc).to.contains(data.imageUrl);
                 expect(title).to.contains(data.title);
                 expect(description).to.contains(data.details);
-            
+
                 expect(await page.isVisible('#action-buttons >> text="Delete"')).to.equal(false, 'Delete button was visible for non owner');
                 expect(await page.isVisible('#action-buttons >> text="Edit"')).to.equal(false, 'Edit button was visible for non-owner');
 
@@ -1038,7 +1038,7 @@ describe("E2E tests", function () {
                 expect(inputs[0]).to.contains(data.title);
                 expect(inputs[1]).to.contains(data.imageUrl);
                 expect(textareas[0]).to.contains(data.details);
-               
+
             });
 
             it("Edit does NOT work with empty fields [ 2.5 Points ]", async function () {
@@ -1187,7 +1187,7 @@ describe("E2E tests", function () {
                 get(data);
                 const { onRequest } = put(modifiedData);
 
-        
+
                 const { get: own } = await handle(endpoints.own(data._id, userData._id));
                 own(1);
 
@@ -1346,7 +1346,7 @@ describe("E2E tests", function () {
                     submitBtn.click(),
                 ]);
 
-                await page.waitForSelector('#description', {timeout: interval});
+                await page.waitForSelector('#description', { timeout: interval });
             });
         })
 
@@ -1536,74 +1536,74 @@ describe("E2E tests", function () {
                 //Check if we're still on Details page
                 await page.waitForSelector('#description', { timeout: interval });
             });
-        })        
-    
+        })
+
     });
     describe('BONUS:Search Page [ 15 Points ]', async () => {
 
         it('Show no matches for Guest [ 2.5 Points ]', async () => {
             const { get } = await handle(endpoints.search('Tomato'));
             get([]);
-    
+
             await page.goto(host);
             await page.waitForTimeout(interval);
-    
+
             await page.click('nav >> text=Search');
             await page.waitForTimeout(interval);
-    
+
             await page.fill('[name="search"]', 'Tomato');
             await page.click('button >> text="Search"');
             await page.waitForTimeout(interval);
-    
+
             expect(await page.isVisible('text=There is no TV show with this title')).to.be.true;
         });
-    
+
         it('Show results with 2 shows for Guest [ 2.5 Points ]', async () => {
             const { get } = await handle(endpoints.search('e'));
             get(mockData.catalog.slice(0, 2));
-            
+
             await page.goto(host);
             await page.waitForTimeout(interval);
-    
+
             await page.click('nav >> text=Search');
             await page.waitForTimeout(interval);
-    
+
             await page.fill('[name="search"]', 'e');
             await page.click('button >> text="Search"');
             await page.waitForTimeout(interval);
-    
+
             const titles = await page.$$eval(".show .title", (t) =>
-            t.map((s) => s.textContent)
-          );
-    
-          expect(titles.length).to.equal(2);
+                t.map((s) => s.textContent)
+            );
+
+            expect(titles.length).to.equal(2);
             expect(titles[0]).to.contains(`${mockData.catalog[0].title}`);
             expect(titles[1]).to.contains(`${mockData.catalog[1].title}`);
         });
-    
+
         it('Show Details button for Guest [ 2.5 Points ]', async () => {
             const { get } = await handle(endpoints.search('f'));
             get(mockData.catalog.slice(0, 1));
-            
+
             await page.goto(host);
             await page.waitForTimeout(interval);
-    
+
             await page.click('nav >> text=Search');
             await page.waitForTimeout(interval);
-    
+
             await page.fill('[name="search"]', 'f');
             await page.click('button >> text="Search"');
             await page.waitForTimeout(interval);
-    
+
             const names = await page.$$eval(".show .title", (t) =>
-            t.map((s) => s.textContent));
-    
+                t.map((s) => s.textContent));
+
             expect(names.length).to.equal(1);
             expect(names[0]).to.contains(`${mockData.catalog[0].title}`);
-    
+
             expect(await page.isVisible('text="Details"')).to.be.true;
         });
-        
+
         it('Show no matches for Users [ 2.5 Points ]', async () => {
             // Login user
             const data = mockData.users[0];
@@ -1612,25 +1612,25 @@ describe("E2E tests", function () {
             await page.click('text=Login');
             await page.waitForTimeout(interval);
             await page.waitForSelector('form');
-    
+
             await page.fill('[name="email"]', data.email);
             await page.fill('[name="password"]', data.password);
-    
+
             await page.click('[type="submit"]');
-    
+
             const { get } = await handle(endpoints.search('Tomato'));
             get([]);
-    
+
             await page.goto(host);
             await page.waitForTimeout(interval);
-    
+
             await page.click('nav >> text=Search');
             await page.waitForTimeout(interval);
-    
+
             await page.fill('[name="search"]', 'Tomato');
             await page.click('button >> text="Search"');
             await page.waitForTimeout(interval);
-    
+
             expect(await page.isVisible('text=There is no TV show with this title')).to.be.true;
         });
 
@@ -1642,35 +1642,35 @@ describe("E2E tests", function () {
             await page.click('text=Login');
             await page.waitForTimeout(interval);
             await page.waitForSelector('form');
-    
+
             await page.fill('[name="email"]', data.email);
             await page.fill('[name="password"]', data.password);
-    
+
             await page.click('[type="submit"]');
-    
+
             const { get } = await handle(endpoints.search('e'));
             get(mockData.catalog.slice(0, 2));
-    
+
             await page.goto(host);
             await page.waitForTimeout(interval);
-    
+
             await page.click('nav >> text=Search');
             await page.waitForTimeout(interval);
-    
+
             await page.fill('[name="search"]', 'e');
             await page.click('button >> text="Search"');
             await page.waitForTimeout(interval);
-    
+
             const titles = await page.$$eval(".show .title", (t) =>
-            t.map((s) => s.textContent));
-    
+                t.map((s) => s.textContent));
+
             expect(titles.length).to.equal(2);
             expect(titles[0]).to.contains(`${mockData.catalog[0].title}`);
             expect(titles[1]).to.contains(`${mockData.catalog[1].title}`);
-    
-      
+
+
         });
-    
+
         it('Details info button for User [ 2.5 Points ]', async () => {
             // Login user
             const data = mockData.users[0];
@@ -1679,34 +1679,34 @@ describe("E2E tests", function () {
             await page.click('text=Login');
             await page.waitForTimeout(interval);
             await page.waitForSelector('form');
-    
+
             await page.fill('[name="email"]', data.email);
             await page.fill('[name="password"]', data.password);
-    
+
             await page.click('[type="submit"]');
-    
+
             const { get } = await handle(endpoints.search('f'));
             get(mockData.catalog.slice(0, 1));
-    
+
             await page.goto(host);
             await page.waitForTimeout(interval);
-    
+
             await page.click('nav >> text=Search');
             await page.waitForTimeout(interval);
-    
+
             await page.fill('[name="search"]', 'f');
             await page.click('button >> text="Search"');
             await page.waitForTimeout(interval);
-    
+
             const names = await page.$$eval(".show .title", (t) =>
-            t.map((s) => s.textContent));
-    
+                t.map((s) => s.textContent));
+
             expect(names.length).to.equal(1);
             expect(names[0]).to.contains(`${mockData.catalog[0].title}`);
-    
+
             expect(await page.isVisible('text="Details"')).to.be.true;
-    
-    
+
+
         });
     });
 });

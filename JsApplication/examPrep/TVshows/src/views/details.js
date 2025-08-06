@@ -39,7 +39,6 @@ export async function showDetails(ctx) {
             ctx.page.redirect("/browse")
         }
 
-
     }
 }
 

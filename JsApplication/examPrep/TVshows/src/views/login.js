@@ -6,7 +6,7 @@ import { setUserData } from "../service/userData.js";
 const temp = (ctx) => html`<section id="login">
           <div class="form">
             <h2>Login</h2>
-            <form class="login-form" @submit=${(e) => onSubmit(e, ctx)}>
+            <form class="login-form" @submit=${createSubmitHandler(onSubmit.bind(null, ctx))}>
               <input type="text" name="email" id="email" placeholder="email" />
               <input
                 type="password"
@@ -25,9 +25,8 @@ export function showLogin(ctx) {
     ctx.render(temp(ctx))
 }
 
-async function onSubmit(e, ctx) {
-    const { email, password } = createSubmitHandler(e)
-
+async function onSubmit(ctx, data) {
+    const { email, password } = data
     try {
         if (!email || !password) {
             throw new Error("All fields are requierd!")

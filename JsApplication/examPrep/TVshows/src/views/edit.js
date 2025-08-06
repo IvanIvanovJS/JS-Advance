@@ -6,7 +6,7 @@ import { createSubmitHandler } from "../service/formService.js";
 const temp = (ctx, data) => html` <section id="edit">
           <div class="form">
             <h2>Edit Show</h2>
-            <form class="edit-form" @submit=${(e) => onSubmit(e, ctx, data._id)}>
+            <form class="edit-form" @submit=${createSubmitHandler(onSubmit.bind(null, ctx, data._id))}>
               <input
                 type="text"
                 name="title"
@@ -53,10 +53,11 @@ export async function showEdit(ctx) {
   ctx.render(temp(ctx, data, id))
 }
 
-async function onSubmit(e, ctx, id) {
-  const data = createSubmitHandler(e);
-  const { title, genre, country, details } = data
-  const imageUrl = data["image-url"]
+async function onSubmit(ctx, id, form) {
+
+  const { title, genre, country, details } = form
+  const imageUrl = form["image-url"]
+
   try {
     if (!title || !genre || !country || !details || !imageUrl) {
       throw new Error("All fields are reqierd!")

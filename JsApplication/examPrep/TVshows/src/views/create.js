@@ -6,7 +6,7 @@ import { createSubmitHandler } from "../service/formService.js";
 const temp = (ctx) => html`  <section id="create">
           <div class="form" >
             <h2>Add Show</h2>
-            <form class="create-form" @submit=${(e) => onSubmit(e, ctx)}>
+            <form class="create-form" @submit=${createSubmitHandler(onSubmit.bind(null, ctx))}>
               <input
               type="text"
               name="title"
@@ -46,8 +46,8 @@ export function showCreate(ctx) {
     ctx.render(temp(ctx))
 }
 
-async function onSubmit(e, ctx) {
-    const data = createSubmitHandler(e);
+async function onSubmit(ctx, data) {
+
     const { title, genre, country, details } = data
     const imageUrl = data["image-url"]
     try {

@@ -1,10 +1,11 @@
-function createSubmitHandler(e) {
-    e.preventDefault()
+function createSubmitHandler(callback) {
+    return function (e) {
+        e.preventDefault()
 
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData)
-    return data
-
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData)
+        return callback(data, e.currentTarget)
+    }
 }
 
 export {

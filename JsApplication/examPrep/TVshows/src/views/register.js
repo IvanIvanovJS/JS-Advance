@@ -6,7 +6,7 @@ import { setUserData } from "../service/userData.js";
 const temp = (ctx) => html`<section id="register">
           <div class="form" >
             <h2>Register</h2>
-            <form class="register-form" @submit=${(e) => onSubmit(e, ctx)}>
+            <form class="register-form" @submit=${createSubmitHandler(onSubmit.bind(null, ctx))}>
               <input
                 type="text"
                 name="email"
@@ -34,8 +34,8 @@ export function showRegister(ctx) {
     ctx.render(temp(ctx))
 }
 
-async function onSubmit(e, ctx) {
-    const data = createSubmitHandler(e)
+async function onSubmit(ctx, data) {
+
     const { email, password } = data
     const rePass = data["re-password"]
     try {

@@ -22,7 +22,7 @@ function navTemp() {
   return html`
     <!-- Navigation -->
         <a id="logo" href="/"
-          ><img id="logo-img" src="./images/show_logo.png" alt="logo" />
+          ><img id="logo-img" src="/images/show_logo.png" alt="logo" />
         </a>
         <nav>
           <div>

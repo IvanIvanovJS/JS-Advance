@@ -1,5 +1,4 @@
 
-import { getUserData } from "../service/userData.js"
 import { del, get, post, put } from "./requester.js"
 
 
