@@ -1,17 +1,18 @@
 import { post, get } from "./requester.js";
+const host = "http://localhost:3030"
 const api = {
-    register: "http://localhost:3030/users/register",
-    login: "http://localhost:3030/users/login",
-    logout: "http://localhost:3030/users/logout"
+    register: "/users/register",
+    login: "/users/login",
+    logout: "/users/logout"
 }
 function register(data) {
-    return post(api.register, data)
+    return post(host + api.register, data)
 }
 function login(data) {
-    return post(api.login, data)
+    return post(host + api.login, data)
 }
 function logout() {
-    return get(api.logout)
+    return get(host + api.logout)
 }
 
 

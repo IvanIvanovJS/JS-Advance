@@ -27,18 +27,18 @@ const temp = (data, isOwner, onDelete) => html`
           </div>
         </section>`
 export async function showDetails(ctx) {
-    const id = ctx.params.id
-    const data = await getMovieById(id)
-    const userData = getUserData()
-    const isOwner = data._ownerId == userData?.id
-    ctx.render(temp(data, isOwner, onDelete))
-    async function onDelete() {
-        const choice = confirm(`Are you sure deleting ${data.title}?`)
-        if (choice) {
-            await deleteMovieById(id)
-            ctx.page.redirect("/browse")
-        }
-
+  const id = ctx.params.id
+  const data = await getMovieById(id)
+  const userData = getUserData()
+  const isOwner = data._ownerId == userData?.id
+  ctx.render(temp(data, isOwner, onDelete))
+  async function onDelete() {
+    const choice = confirm(`Are you sure deleting ${data.title}?`)
+    if (choice) {
+      await deleteMovieById(id)
+      ctx.page.redirect("/dashboard")
     }
+
+  }
 }
 

@@ -17,9 +17,9 @@ const temp = (data) => html`<h2>Users Recommendations</h2>
         </section>
         <!-- Display an h2 if there are no posts -->
         `
-export async function showBrowser(ctx) {
-    const data = await getAllMovies()
+export async function showDashobard(ctx) {
+  const data = await getAllMovies()
 
-    ctx.render(temp(data))
+  ctx.render(temp(data))
 }
 

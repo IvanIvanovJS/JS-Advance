@@ -43,22 +43,22 @@ const temp = (ctx) => html`  <section id="create">
           </div>
         </section>`
 export function showCreate(ctx) {
-    ctx.render(temp(ctx))
+  ctx.render(temp(ctx))
 }
 
 async function onSubmit(ctx, data) {
 
-    const { title, genre, country, details } = data
-    const imageUrl = data["image-url"]
-    try {
-        if (!title || !genre || !country || !details || !imageUrl) {
-            throw new Error("All fields are reqierd!")
-        }
-        await createMovie({ title, imageUrl, genre, country, details })
-        ctx.page.redirect('/browse')
-    } catch (error) {
-        return alert(error.message)
+  const { title, genre, country, details } = data
+  const imageUrl = data["image-url"]
+  try {
+    if (!title || !genre || !country || !details || !imageUrl) {
+      throw new Error("All fields are reqierd!")
     }
+    await createMovie({ title, imageUrl, genre, country, details })
+    ctx.page.redirect('/dashboard')
+  } catch (error) {
+    return alert(error.message)
+  }
 
 
 }
