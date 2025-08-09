@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <title>MindNest</title>
+</head>
+
+<body>
+  <!-- BONUS: Notification -->
+  <section id="notifications">
+    <div id="errorBox">
+      <span class="msg">MESSAGE</span>
+    </div>
+  </section>
+  <div id="wrapper">
+    <header>
+      <!-- Navigation -->
+      <a id="logo" href="#"><img id="logo" src="./images/home.webp" alt="img" /></a>
+      <nav>
+        <div>
+          <a href="#">Mindful Tips</a>
+        </div>
+
+        <!-- Logged-in users -->
+        <div class="user">
+          <a href="#">Share Your Tip</a>
+          <a href="#">Logout</a>
+        </div>
+
+        <!-- Guest users -->
+        <div class="guest">
+          <a href="#">Login</a>
+          <a href="#">Register</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Home page -->
+      <section id="home">
+        <img src="./images/home.webp" alt="home" />
+        <p>Welcome to MindNest - your safe haven for mental wellness and mindfulness. Discover expert tips, guided
+          meditations, and a supportive community sharing insights to help you find calm, balance, and inner peace every
+          day. Join us and nurture your mind with care.</p>
+      </section>
+
+      <!-- Dashboard page -->
+      <h3 class="heading">Mindful Tips</h3>
+      <section id="tips-dashboard">
+        <!-- Display a div with information about every post (if any)-->
+        <div class="tip">
+          <img src="./images/Deep Breathing to Reduce Stress.webp" alt="example1" />
+          <h3 class="title">Deep Breathing to Reduce Stress</h3>
+          <div class="tip-info">
+            <p class="type">Type: Breathing Technique</p>
+            <p class="difficulty">Difficulty: Easy</p>
+          </div>
+          <a class="details-btn" href="#">View Tip</a>
+        </div>
+        <div class="tip">
+          <img src="./images/Short Walk in Nature.webp" alt="example1" />
+          <h3 class="title">Short Walk in Nature</h3>
+          <div class="tip-info">
+            <p class="type">Type: Physical Activity</p>
+            <p class="difficulty">Difficulty: Easy</p>
+          </div>
+          <a class="details-btn" href="#">View Tip</a>
+        </div>
+        <div class="tip">
+          <img src="./images/Practice Silence and Observe Your Thoughts.webp" alt="example1" />
+          <h3 class="title"> Practice Silence and Observe Your Thoughts</h3>
+          <div class="tip-info">
+            <p class="type">Type: Meditation</p>
+            <p class="difficulty">Difficulty: Medium</p>
+          </div>
+          <a class="details-btn" href="#">View Tip</a>
+        </div>
+      </section>
+      <!-- Display an h3 if there are no posts -->
+      <h3 class="empty">No Mindful Tips Added Yet.</h3>
+
+      <!-- Register Page (Only for Guest users) -->
+      <section id="register">
+        <div class="form">
+          <h2>Register</h2>
+          <form class="register-form">
+            <input type="text" name="email" id="register-email" placeholder="email" />
+            <input type="password" name="password" id="register-password" placeholder="password" />
+            <input type="password" name="re-password" id="repeat-password" placeholder="repeat password" />
+            <button type="submit">register</button>
+            <p class="message">Already registered? <a href="#">Login</a></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Login Page (Only for Guest users) -->
+      <section id="login">
+        <div class="form">
+          <h2>Login</h2>
+          <form class="login-form">
+            <input type="text" name="email" id="email" placeholder="email" />
+            <input type="password" name="password" id="password" placeholder="password" />
+            <button type="submit">login</button>
+            <p class="message">
+              Not registered? <a href="#">Create an account</a>
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <!-- Create Page (Only for logged-in users) -->
+      <section id="create">
+        <div class="form form-item">
+          <h2>Share Your Tip</h2>
+          <form class="create-form">
+            <input type="text" name="title" id="title" placeholder="Title" />
+            <input type="text" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+            <input type="text" name="type" id="type" placeholder="Type" />
+            <select name="difficulty" id="difficulty">
+              <option value="" disabled selected>Difficulty</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+            <textarea id="description" name="description" placeholder="Description" rows="2" cols="50"></textarea>
+            <button type="submit">Add</button>
+          </form>
+        </div>
+      </section>
+      <!-- Edit Page (Only for logged-in users) -->
+      <section id="edit">
+        <div class="form form-item">
+          <h2>Edit Your Item</h2>
+          <form class="edit-form">
+            <input type="text" name="title" id="title" placeholder="Title" />
+            <input type="text" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+            <input type="text" name="type" id="type" placeholder="Type" />
+            <select name="difficulty" id="difficulty">
+              <option value="" disabled selected>Difficulty</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+            <textarea id="description" name="description" placeholder="Description" rows="2" cols="50"></textarea>
+            <button type="submit">Edit</button>
+          </form>
+        </div>
+      </section>
+      <!-- Details page -->
+
+      <section id="details">
+        <div id="details-wrapper">
+          <div>
+            <img id="details-img" src="./images/Deep Breathing to Reduce Stress.webp" alt="example1" />
+            <p id="details-title">Deep Breathing to Reduce Stress</p>
+          </div>
+          <div id="info-wrapper">
+            <div id="details-description">
+              <p class="details-type">Type: Breathing Technique</p>
+              <p class="details-difficulty">
+                Difficulty: Easy
+              </p>
+              <p id="tip-description">
+                Practice deep, slow breathing to reduce tension and improve focus. Inhale through your nose for 4
+                seconds, hold for 7 seconds, and exhale through your mouth for 8 seconds.
+              </p>
+            </div>
+            <!--Edit and Delete are only for creator-->
+            <div id="action-buttons">
+              <a href="" id="edit-btn">Edit</a>
+              <a href="" id="delete-btn">Delete</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+
+</html>
